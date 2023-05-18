@@ -152,6 +152,9 @@ class LocalDocQA:
         if llm_model.startswith('moss'):
             from models.moss_llm import MOSS
             self.llm = MOSS()
+        elif llm_model.startswith('alpaca') or llm_model.startswith('llama'):
+            from models.alpaca_llm import LLAMA
+            self.llm = LLAMA()
         else:
             from models.chatglm_llm import ChatGLM
             self.llm = ChatGLM()
@@ -249,7 +252,7 @@ class LocalDocQA:
             logger.error(e)
             return None, [one_title]
 
-    def get_knowledge_based_answer(self, query, vs_path, chat_history=[], streaming: bool = STREAMING):
+    def get_knowledge_based_answer(self, query, vs_path, chat_history=[], streaming: bool = STREAMING, **kwargs,):
         vector_store = FAISS.load_local(vs_path, self.embeddings)
         FAISS.similarity_search_with_score_by_vector = similarity_search_with_score_by_vector
         vector_store.chunk_size = self.chunk_size
@@ -261,7 +264,8 @@ class LocalDocQA:
 
         for result, history in self.llm._call(prompt=prompt,
                                               history=chat_history,
-                                              streaming=streaming):
+                                              streaming=streaming,
+                                              **kwargs):
             torch_gc()
             history[-1][0] = query
             response = {"query": query,

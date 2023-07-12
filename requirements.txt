@@ -20,7 +20,7 @@ tabulate
 feedparser
 azure-core
 openai
-#accelerate~=0.18.0
+accelerate~=0.18.0
 #peft~=0.3.0
 #bitsandbytes; platform_system != "Windows"
 #llama-cpp-python==0.1.34; platform_system != "Windows"

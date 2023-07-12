@@ -421,10 +421,14 @@ def api_start(host, port):
     # Add CORS middleware to allow all origins
     # 在config.py中设置OPEN_DOMAIN=True，允许跨域
     # set OPEN_DOMAIN=True in config.py to allow cross-domain
+    # origins 中填写源地址，如：http://11.34.71.33:8080
+    origins = [
+    "http://11.34.71.33:8080"
+      ]
     if OPEN_CROSS_DOMAIN:
         app.add_middleware(
             CORSMiddleware,
-            allow_origins=["*"],
+            allow_origins=origins,
             allow_credentials=True,
             allow_methods=["*"],
             allow_headers=["*"],

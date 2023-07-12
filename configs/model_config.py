@@ -19,6 +19,7 @@ embedding_model_dict = {
     "text2vec": "GanymedeNil/text2vec-large-chinese",
     "m3e-small": "moka-ai/m3e-small",
     "m3e-base": "moka-ai/m3e-base",
+    "ImageBind":"ImageBind",
 }
 
 # Embedding model name

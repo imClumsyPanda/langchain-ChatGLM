@@ -1,3 +1,4 @@
+
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from vectorstores import MyFAISS
 from langchain.document_loaders import UnstructuredFileLoader, TextLoader, CSVLoader
@@ -108,6 +109,7 @@ def generate_prompt(related_docs: List[str],
     return prompt
 
 
+
 def search_result2docs(search_results):
     docs = []
     for result in search_results:
@@ -132,8 +134,13 @@ class LocalDocQA:
                  llm_model: BaseAnswer = None,
                  top_k=VECTOR_SEARCH_TOP_K,
                  ):
+
         self.llm = llm_model
-        self.embeddings = HuggingFaceEmbeddings(model_name=embedding_model_dict[embedding_model],
+        if embedding_model == "ImageBind":
+            from chains.modules.embeddings import MyEmbeddings
+            self.embeddings = MyEmbeddings()
+        else:
+            self.embeddings = HuggingFaceEmbeddings(model_name=embedding_model_dict[embedding_model],
                                                 model_kwargs={'device': embedding_device})
         self.top_k = top_k
 
@@ -170,7 +177,7 @@ class LocalDocQA:
                 if len(failed_files) > 0:
                     logger.info("以下文件未能成功加载：")
                     for file in failed_files:
-                        logger.info(f"{file}\n")
+                        logger.info(file, end="\n")
 
         else:
             docs = []

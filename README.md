@@ -234,6 +234,7 @@ Web UI 可以实现如下功能：
   - [x] [GanymedeNil/text2vec-large-chinese](https://huggingface.co/GanymedeNil/text2vec-large-chinese)
   - [x] [moka-ai/m3e-small](https://huggingface.co/moka-ai/m3e-small)
   - [x] [moka-ai/m3e-base](https://huggingface.co/moka-ai/m3e-base)
+  - [x] [ImageBind](https://github.com/facebookresearch/ImageBind)
 - [ ] Web UI
   - [x] 基于 gradio 实现 Web UI DEMO
   - [x] 基于 streamlit 实现 Web UI DEMO
